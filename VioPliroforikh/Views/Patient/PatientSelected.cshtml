@@ -1,0 +1,12 @@
+﻿@model VioPliroforikh.ViewModels.PatientAppointmentsViewModel
+@{
+    ViewBag.Title = "PatientIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Πληροφορίες Ασθενή</h2>
+</br>
+@Html.Partial("PatientInfo", Model.Patient)
+</br>
+@Html.Partial("PatientAppointments", Model.Appointments)
+

@@ -1,0 +1,20 @@
+﻿@model VioPliroforikh.ViewModels.ExamIndexViewClass
+@{
+    ViewBag.Title = "ExamIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="col-sm-12"><h2>Ευρετήριο Εξετάσεων</h2></div>
+<br/>
+<div class="row">
+    <div class="col-sm-5">
+
+        @Html.Partial("ExamSelected")
+
+    </div>
+    <div class="col-sm-7">
+        @Html.Partial("ExamList")
+    </div>
+
+
+</div>

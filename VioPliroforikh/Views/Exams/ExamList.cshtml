@@ -1,0 +1,56 @@
+﻿@model VioPliroforikh.ViewModels.ExamIndexViewClass
+<br />
+@if (User.IsInRole("ApplicationAdmin"))
+{
+    @Html.ActionLink("Προσθεστε Νεα Εξεταση", "ExamNew", "Exams", null, new { @class = "btn btn-primary" })
+}
+    <br />
+    <br />
+
+
+    @using (Html.BeginForm("ExamFilter", "Exams", new { @class = "form-inline" }))
+    {
+        <div class="row">
+            @Html.TextBoxFor(e => e.Filter, null, new { @class = "form-control col-sm-7", @type = "text", @placeholder = "Search" }) &nbsp;<button class="btn btn-secondary col-sm-4" type="submit">Search</button>
+
+        </div>
+
+    }
+
+
+    <br />
+
+    @if (Model.Exams.Count() != 0)
+    {
+
+        <ul class="list-group">
+            @foreach (var exam in Model.Exams)
+             {
+                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" style="font-size:125%; float: right">
+                    @if (User.IsInRole("ApplicationAdmin"))
+                    {
+                        <div class="col-sm-8"><span class="badge badge-primary badge-pill">@exam.Price &#8364;</span> @Html.ActionLink(@exam.Name, "ExamFilter", "Exams", new { id = @exam.Id, filter = @Model.Filter }, new { Style = "color:#222" })</div>
+                        <div class="col-sm-4">
+                            <a href="@Url.Action("AppointmentForm", "Appointment", new { examId = @exam.Id })"><i class="fa fa-book" aria-hidden="true" style="color:#158CBA"></i></a>&emsp;
+                            <a href="@Url.Action("ExamNew", "Exams", new { id = @exam.Id })"><i class="fa fa-pencil" aria-hidden="true" style="color: #158CBA"></i></a><span>&emsp;</span>
+                            <a href="@Url.Action("ExamDelete", "Exams", new { id = @exam.Id })"><i class="fa fa-trash" aria-hidden="true" style="color:#158CBA"></i></a>
+                        </div>
+                    }
+                    else { 
+                       <div class="col-sm-12"><span class="badge badge-primary badge-pill">@exam.Price &#8364;</span> @Html.ActionLink(@exam.Name, "ExamFilter", "Exams", new { id = @exam.Id, filter = @Model.Filter }, new { Style = "color:#222" })</div>
+                    
+                    }
+                </li>
+             }
+        </ul>
+
+    }
+    else
+    {
+        <br />
+        <h2>Δεν βρέθηκαν εξετάσεις που να ταιράζουν</h2>
+        <h2> με τα κριτήρια αναζητησης.</h2>
+
+    }
+
+

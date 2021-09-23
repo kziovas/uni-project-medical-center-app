@@ -1,0 +1,72 @@
+﻿@model VioPliroforikh.Models.Patient
+
+@{
+    ViewBag.Title = "PatientForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Επεξεργασία Καρτέλας Ασθενή</h2>
+
+</br>
+@using (Html.BeginForm("PatientSave", "Patient"))
+{
+
+
+    <fieldset disabled="@(User.IsInRole("ApplicationAdmin") ? null : "disabled")">
+
+
+        <div class="row">
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(p => p.FirstName, new { @class = "col-form-label", })
+                @Html.TextBoxFor(p => p.FirstName, new { @class = "form-control", @placeholder = "Όνομα Ασθενή", @id = "inputDefault" })
+                @Html.ValidationMessageFor(p => p.FirstName)
+            </div>
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(p => p.LastName, new { @class = "col-form-label", })
+                @Html.TextBoxFor(p => p.LastName, new { @class = "form-control", @placeholder = "Επίθετο Ασθενή", @id = "inputDefault" })
+                @Html.ValidationMessageFor(p => p.LastName)
+            </div>
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(p => p.DoB, new { @class = "col-form-label", })
+                @Html.TextBoxFor(p => p.DoB, new { @class = "form-control", @placeholder = "31/12/2020", @id = "inputDefault" })
+                @Html.ValidationMessageFor(p => p.DoB)
+            </div>
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(p => p.Gender, new { @class = "col-form-label", })
+                <br />
+                @Html.DropDownListFor(p => p.Gender, new SelectList(new string[] { "Άρρεν", "Θήλυ", "Άλλο" }, new { @class = "form-control", @id = "inputDefault", @style = "width=150%; height:150%; font-size:150%" }))
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(p => p.Conditions, new { @class = "col-form-label", })
+                @Html.TextAreaFor(p => p.Conditions, new { @class = "form-control", @id = "Textarea1", @rows = "4" })
+                @Html.ValidationMessageFor(p => p.Conditions)
+            </div>
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(p => p.Treatments, new { @class = "col-form-label", })
+                @Html.TextAreaFor(p => p.Treatments, new { @class = "form-control", @id = "Textarea1", @rows = "4" })
+                @Html.ValidationMessageFor(p => p.Treatments)
+            </div>
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(p => p.Phone, new { @class = "col-form-label", })
+                @Html.TextBoxFor(p => p.Phone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(p => p.Phone)
+            </div>
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(p => p.Email, new { @class = "col-form-label", })
+                @Html.TextBoxFor(p => p.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(p => p.Email)
+            </div>
+        </div>
+        @if (User.IsInRole("ApplicationAdmin"))
+        {
+            <button type="submit" class="btn btn-primary">Submit</button> <span>&emsp;</span> @Html.ActionLink("Cancel", "PatientList", "Patient", null, new { @class = "btn btn-primary" })
+        }
+
+    </fieldset>
+    if (!User.IsInRole("ApplicationAdmin"))
+    {
+        @Html.ActionLink("Cancel", "PatientList", "Patient", null, new { @class = "btn btn-primary" })
+    }
+}

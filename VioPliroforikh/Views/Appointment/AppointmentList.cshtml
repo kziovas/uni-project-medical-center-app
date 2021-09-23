@@ -1,0 +1,78 @@
+﻿@model VioPliroforikh.ViewModels.AppointmentPatientExamList
+
+@{
+    ViewBag.Title = "AppointmentList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Λίστα Ραντεβού</h2>
+<br />
+<br />
+
+@if (Model.AppointmentPatientExams.Count() != 0)
+{
+
+<ul class="list-group ">
+    @if (User.IsInRole("ApplicationAdmin"))
+    {
+        foreach (var ape in Model.AppointmentPatientExams)
+        {
+            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" style="font-size:125%; float: right">
+                <div class="col-sm-3">@ape.Appointment.Date.ToString("dd MMM yyyy HH:mm") </div>
+                <p class="col-sm-4">@ape.Patient.FirstName  @ape.Patient.LastName</p>
+                @if (ape.Appointment.Confirmed)
+                {
+                    <div class="col-sm-3"><span class="badge badge-primary badge-pill">Επιβαιβεωμένο</div>
+                }
+                else
+                {
+                    <div class="col-sm-3"><span class="badge badge-primary badge-pill">Μη Επιβαιβεωμένο</div>
+                }
+                <div class="col-sm-3">
+                    <a href="@Url.Action("AppointmentDelete", "Appointment", new { id = ape.Appointment.Id })"><i class="fa fa-trash" aria-hidden="true" style="color:#158CBA"></i></a> &emsp;
+                    <a href="@Url.Action("AppointmentForm", "Appointment", new { apId = ape.Appointment.Id })"><i class="fa fa-pencil" aria-hidden="true" style="color: #158CBA"></i></a>
+                </div>
+            </li>
+        }
+    }
+    else
+    {
+        if (Model.AppointmentPatientExams.Where(p => p.Patient.Email == User.Identity.Name).Count() != 0)
+        {
+            foreach (var ape in Model.AppointmentPatientExams.Where(p => p.Patient.Email == User.Identity.Name))
+            {
+                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" style="font-size:125%; float: right">
+                    <div class="col-sm-3">@ape.Appointment.Date.ToString("dd MMM yyyy HH:mm") </div>
+                    <p class="col-sm-4">@ape.Patient.FirstName  @ape.Patient.LastName</p>
+                    @if (ape.Appointment.Confirmed)
+                    {
+                        <div class="col-sm-3"><span class="badge badge-primary badge-pill">Επιβαιβεωμένο</div>
+                    }
+                    else
+                    {
+                        <div class="col-sm-3"><span class="badge badge-primary badge-pill">Μη Επιβαιβεωμένο</div>
+                    }
+                    <div class="col-sm-3">
+                        <a href="@Url.Action("AppointmentForm", "Appointment", new { apId = ape.Appointment.Id })"><i class="fa fa-pencil" aria-hidden="true" style="color: #158CBA"></i></a>
+                    </div>
+                </li>
+            }
+        }
+        else
+        {
+
+            <br />
+            <h2>Δεν βρέθηκαν προγραμματισμένα ραντεβού</h2>
+            <h2> που να αντιστοιχουν στα στοιχεία του χρήστη.</h2>
+        }
+
+    }
+</ul>
+
+}
+else
+{
+    <br />
+    <h2>Δεν βρέθηκαν προγραμματισμένα ραντεβού.</h2>
+  
+}

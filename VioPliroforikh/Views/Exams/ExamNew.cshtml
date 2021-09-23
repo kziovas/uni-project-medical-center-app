@@ -1,0 +1,83 @@
+﻿@model VioPliroforikh.Models.Exam
+
+@{
+    ViewBag.Title = "ExamNew";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Επεξεργασία Εξέτασης</h2>
+</br>
+@using (Html.BeginForm("ExamSave", "Exams"))
+{
+<fieldset>
+    <div class="row">
+        <div class="form-group col-sm-4">
+            @Html.LabelFor(m => m.Name, new { @class = "col-form-label", })
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Νέα Εξέταση", @id = "inputDefault" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.LabelFor(m => m.Description, new { @class = "col-form-label", })
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @id = "Textarea1", @rows = "3" })
+            @Html.ValidationMessageFor(m => m.Description)
+        </div>
+        <div class="form-group col-sm-4">
+            @Html.LabelFor(m => m.Preparation, new { @class = "col-form-label", })
+            @Html.TextAreaFor(m => m.Preparation, new { @class = "form-control", @id = "Textarea2", @rows = "3" })
+            @Html.ValidationMessageFor(m => m.Preparation)
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-6">
+            @Html.LabelFor(m => m.Price, new { @class = "col-form-label", })
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">&#8364;</span>
+                    </div>
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @aria_label = "Amount (to the nearest euro)" })
+                    <div class="input-group-append">
+                        <span class="input-group-text">.00</span>
+                    </div>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(m => m.Price)
+        </div>
+        <fieldset class="form-group col-sm-6">
+            <legend>Διάρκεια (λεπτά)</legend>
+            <label id="sliderValue" for="customRange1" class="badge badge-primary badge-pill" style="font-size:150%"> </label>
+            <input type="range" class="custom-range slider" id="slider" value="20" min="0" max="60">
+            @Html.TextBoxFor(m => m.Duration, new { @type = "hidden", @id = "hiddenValue" })
+        </fieldset>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>  &emsp;  @Html.ActionLink("Cancel", "ExamIndex", "Exams", null, new { @class = "btn btn-primary" })
+</fieldset>
+}
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        var slider = document.getElementById("slider");
+        var output = document.getElementById("sliderValue");
+        var outputHidden = document.getElementById("hiddenValue");
+        if (outputHidden.value != null && outputHidden.value !='') {
+            output.innerHTML = outputHidden.value;
+            slider.value = outputHidden.value;
+        }
+
+        else {
+            output.innerHTML = slider.value;
+            outputHidden.value = slider.value;
+
+        }
+
+        slider.oninput = function () {
+            output.innerHTML = this.value;
+            outputHidden.value = this.value;
+        }
+
+    </script>
+
+}

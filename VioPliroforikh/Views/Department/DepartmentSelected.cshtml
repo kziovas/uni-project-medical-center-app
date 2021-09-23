@@ -1,0 +1,47 @@
+﻿@model VioPliroforikh.Models.Department
+@{
+    ViewBag.Title = "DepartmentSelected";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="card border-primary mb-3">
+        <div class="card-header " >
+            <i class="@Model.Logo" aria-hidden="true" style="font-size:300%"></i>
+        </div>
+        <div class="card-body">
+            <h2 class="card-title">@Model.Title</h2>
+            </br>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="@Url.Content(@Model.Image1)" class="img-fluid">
+                </div>
+                <div class="col-sm-8 ">
+                    @Model.Description
+                </div>
+
+            </div>
+            </br>
+            </br>
+            <div class="row">
+                <div class="col-sm-4">
+                    <img src="@Url.Content(@Model.Image2)" class="img-fluid">
+                </div>
+                <div class="col-sm-8 ">
+                    @Model.Details
+                </div>
+            </div>
+            </br>
+            <hr color=" #158CBA"/>
+            </br>
+            <div class="row">
+                <div class="col-sm-12 p-1 text-center ">
+                    Email:@Model.Email  &emsp; Τηλέφωνο: @Model.Phone
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+

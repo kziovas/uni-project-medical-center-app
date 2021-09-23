@@ -1,0 +1,92 @@
+﻿@model VioPliroforikh.ViewModels.PatientsList
+
+@{
+    ViewBag.Title = "PatientList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Λίστα Ασθενών</h2>
+
+<br />
+@if (User.IsInRole("ApplicationAdmin"))
+{
+    @Html.ActionLink("Προσθεστε Νεο Ασθενη", "PatientForm", "Patient", null, new { @class = "btn btn-primary" })
+}
+<br />
+<br />
+
+@if (User.IsInRole("ApplicationAdmin"))
+{
+    if (Model.Patients.Count() != 0)
+    {
+
+        <table id="patients" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">Όνομα</th>
+                    <th class="text-center">Τηλέφωνο</th>
+                    <th class="text-center">Φύλο</th>
+                    <th class="text-center">Διαγραφή</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var patient in Model.Patients)
+                {
+                    <tr>
+                        <td class="text-center"><a href="@Url.Action("PatientForm", "Patient", new { id = @patient.Id })">@patient.FirstName @patient.LastName &emsp;<i class="fa fa-pencil" aria-hidden="true" style="color: #158CBA"></i></a></td>
+                        <td class="text-center">@patient.Phone</td>
+                        <td class="text-center">@patient.Gender</td>
+                        <td class="text-center"><a href="@Url.Action("PatientDelete", "Patient", new { id = @patient.Id })"><i class="fa fa-trash" aria-hidden="true" style="color:#158CBA"></i></a></td>
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+    }
+    else
+    {
+        <br />
+        <h2> Δεν βρέθηκαν καταχωρημένα στοιχεία ασθενών.</h2>
+    }
+}
+
+else
+{
+    if (Model.Patients.Where(p => p.Email == User.Identity.Name).Count() != 0)
+    {
+        <table id="patients" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">Όνομα</th>
+                    <th class="text-center">Τηλέφωνο</th>
+                    <th class="text-center">Φύλο</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var patient in Model.Patients.Where(p => p.Email == User.Identity.Name))
+                 {
+                    <tr>
+                        <td class="text-center"><a href="@Url.Action("PatientForm", "Patient", new { id = @patient.Id })">@patient.FirstName @patient.LastName &emsp;<i class="fa fa-pencil" aria-hidden="true" style="color: #158CBA"></i></a></td>
+                        <td class="text-center">@patient.Phone</td>
+                        <td class="text-center">@patient.Gender</td>
+                    </tr>
+
+                 }
+            </tbody>
+
+        </table>
+    }
+    else
+    {
+
+        <br />
+        <h2>Δεν βρέθηκαν καταχωρημένα στοιχεία ασθενή</h2>
+        <h2> που να αντιστοιχουν στα στοιχεία του χρήστη.</h2>
+    }
+
+
+
+}

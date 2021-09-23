@@ -1,0 +1,35 @@
+﻿
+@model VioPliroforikh.ViewModels.DepartmentsList
+
+@{
+    ViewBag.Title = "DepartmentList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<h2>Λίστα Τμημάτων</h2>
+
+
+<div class="row">
+    @foreach (var department in Model.Departments)
+    {
+
+        <div class="col-sm-6">
+            <div class="card text-white bg-primary mb-3" style="height: 95%">
+                <div class="card-header"><i class="@department.Logo" aria-hidden="true" style="font-size:300%"></i></div>
+                <div class="card-body">
+                    <h4 class="card-title">@department.Title</h4>
+                    <p class="card-text">@department.Description</p>
+                    <p>@department.Email</p>
+                    <p>@department.Phone</p>
+                    @Html.ActionLink("δειτε περισσοτερα", "DepartmentSelected", "Department", new {id=@department.Id }, new { @class = "btn btn-outline-secondary" })
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+

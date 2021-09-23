@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="0" class="jumbotron" style="background-image: url('/Images/home_page1.jpg');background-size: 100% 116%; display:inline-block">
+    <h1>Όμιλος Βιοεξεταστική</h1>
+    <p class="lead">Το διαγνωστικό κέντρο Βιοεξεταστική αποτελεί τον κορυφαίο εικονικό φορέα παροχής ιατρικών υπηρεσιών πρωτοβάθμιας περίθαλψης στην Ελλάδα.</p>
+    <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-lg">Δειτε περσισσοτερα &raquo;</a></p>
+</div>
+<div id="1" class="jumbotron" style="background-image: url('/Images/home_page2.jpg');background-size: 100% 100%;display:none">
+    <h1>Όμιλος Βιοεξεταστική</h1>
+    <p class="lead">Το διαγνωστικό κέντρο Βιοεξεταστική αποτελεί τον κορυφαίο εικονικό φορέα παροχής ιατρικών υπηρεσιών πρωτοβάθμιας περίθαλψης στην Ελλάδα.</p>
+    <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-lg">Δειτε περσισσοτερα &raquo;</a></p>
+</div>
+<div id="2" class="jumbotron" style="background-image: url('/Images/home_page3.jpg');background-size: 100% 116%;display:none">
+    <h1>Όμιλος Βιοεξεταστική</h1>
+    <p class="lead">Το διαγνωστικό κέντρο Βιοεξεταστική αποτελεί τον κορυφαίο εικονικό φορέα παροχής ιατρικών υπηρεσιών πρωτοβάθμιας περίθαλψης στην Ελλάδα.</p>
+    <p><a href="@Url.Action("About", "Home")" class="btn btn-primary btn-lg">Δειτε περσισσοτερα &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Γενικές Πληροφορίες για τον Κορωνοιο</h2>
+        <p>
+
+            Η ασθένεια κορονοϊού 2019 (Coronavirus disease 2019, COVID-19), επίσης γνωστή ως οξεία αναπνευστική νόσος 2019-nCoV,
+            είναι μία μολυσματική ασθένεια που προκαλείται από τον κορονοϊό SARS-CoV-2.
+            Ο ιός και η ασθένεια που προκαλεί πρωτοεντοπίστηκε στην πόλη Ουχάν της Κίνας στα τέλη του 2019.
+        </p>
+        <p><a href="@Url.Action("Covid", "Home")" class="btn btn-primary">Δειτε περισσότερα &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Mετάδοση Κορωνοιού</h2>
+        <p>
+            Ο κύριος τρόπος μόλυνσης μεταξύ των ανθρώπων είναι η μετάδοση από άτομο σε άτομο, η οποία γενικά συμβαίνει μέσω αναπνευστικών σταγονιδίων μολυσμένων ατόμων τα οποία βήχουν, φτερνίζονται ή εκπνέουν, ή με άμεση ή έμμεση επαφή με εκκρίσεις αναπνευστικού (μέσω μολυσμένων χεριών).
+            Συγκεκριμένα, εκτός από την εισπνοή μολυσμένων σταγονιδίων, το άγγιγμα μιας μολυσμένης από σταγονίδια επιφάνειας και στη συνέχεια το άγγιγμα του προσώπου (μύτη, στόμα, οφθαλμοί) με άπλυτα χέρια είναι ένας σημαντικός τρόπος μετάδοσης.
+            Η μετάδοση μπορεί να περιοριστεί με το πλύσιμο των χεριών, με σαπούνι και νερό για τουλάχιστον 30 δευτερόλεπτα, ή τον καθαρισμό τους με αντισηπτικό διάλυμα (πχ. οινοπνεύματος) και επιπλέον την τήρηση απόστασης μεγαλύτερης του 1,5 μέτρου από άλλα άτομα, την αποφυγή χώρων όπου υπάρχει συνωστισμός, ή πιθανώς με την χρήση μέσων ατομικής προστασίας (πχ. μάσκα, γάντια).<br />
+
+        </p>
+
+        <p><a href="@Url.Action("Be_Safe", "Home")" class="btn btn-primary">Δειτε περισσότερα &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Θηλασμος και Κορωνοϊος</h2>
+        <p>
+            Σύμφωνα με τα δεδομένα που υπάρχουν ως τώρα, ο ιός δεν έχει ανιχνευθεί στο μητρικό γάλα των γυναικών που νοσούν,εντούτοις δεν είναι ακόμα γνωστό για το αν οι μητέρες θετικές στον κορονοϊό μπορούν να μεταδώσουν τον ιό μέσω του μητρικού γάλακτος.
+            Ο κύριος κίνδυνος για τα βρέφη που θηλάζουν είναι η στενή επαφή με τη μητέρα, όπου η μόλυνση μπορεί να γίνει μέσω σταγονιδίων των αναπνευστικών οδών, σε περίπτωση που η μητέρα είναι θετική.
+        </p>
+        <p><a href="@Url.Action("Breastfeeding", "Home")" class="btn btn-primary">Δειτε περισσότερα &raquo;</a></p>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    <script>
+        var i = 0;
+        var arrayofSlides = document.getElementsByClassName("jumbotron");
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+        function showSlides() {
+
+            if (i < arrayofSlides.length) {
+                arrayofSlides[0].style.display = "none";
+                arrayofSlides[1].style.display = "none";
+                arrayofSlides[2].style.display = "none";
+                arrayofSlides[i].style.display = "inline-block";
+                console.log(i);
+                i++;
+            }
+            else {
+                i = 0;
+            }
+            setTimeout(showSlides, 2000);
+
+        }
+
+
+    </script>
+}

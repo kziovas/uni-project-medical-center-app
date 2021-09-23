@@ -1,0 +1,18 @@
+﻿@model VioPliroforikh.ViewModels.AppointmentsList
+
+    <h4>Ραντεβού</h4>
+
+@if (Model.Appointments.Count == 0)
+{
+
+    <p>Αυτός ο ασθενής δεν έχει κανένα καταχωρημένο ραντεβού</p>
+
+}
+
+@foreach (var appointment in Model.Appointments)
+{
+
+    <p>@appointment.Date </p>
+    <p>@appointment.FinalPrice </p>
+
+}

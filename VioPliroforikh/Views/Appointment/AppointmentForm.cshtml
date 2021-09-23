@@ -1,0 +1,138 @@
+﻿@model VioPliroforikh.ViewModels.AppointmentPatientExamView
+
+@{
+    ViewBag.Title = "AppointmentForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Δημιουργία Ραντεβού</h2>
+
+
+<br />
+@using (Html.BeginForm("AppointmentSave", "Appointment"))
+{
+    <fieldset disabled="@(User.IsInRole("ApplicationAdmin") ? null : "disabled")">
+        @Html.TextBoxFor(a => a.Appointment.UID, new { @type = "hidden", @id = "hiddenValue" })
+        <div class="row">
+            <div class="form-group col-sm-3">
+                @Html.LabelFor(a => a.Exam.Name, new { @class = "col-form-label", })
+                @Html.TextBoxFor(a => a.Exam.Name, new { @class = "form-control", @placeholder = "Όνομα Εξέτασης", @id = "inputDefault", @readonly = "true" })
+                @Html.ValidationMessageFor(a => a.Exam.Name)
+            </div>
+            @if (Model.Patient.FirstName != null && Model.Patient.LastName != null)
+            {
+                <div class="form-group col-sm-3">
+                    @Html.LabelFor(a => a.Patient.FirstName, new { @class = "col-form-label", })
+                    @Html.TextBoxFor(a => a.Patient.FirstName, new { @class = "form-control", @placeholder = "Όνομα Ασθενή", @id = "inputDefault", @readonly = "true" })
+                    @Html.ValidationMessageFor(a => a.Patient.FirstName)
+                </div>
+                <div class="form-group col-sm-3">
+                    @Html.LabelFor(a => a.Patient.LastName, new { @class = "col-form-label", })
+                    @Html.TextBoxFor(a => a.Patient.LastName, new { @class = "form-control", @placeholder = "Επίθετο Ασθενή", @id = "inputDefault", @readonly = "true" })
+                    @Html.ValidationMessageFor(a => a.Patient.LastName)
+                </div>
+                <div class="form-group col-sm-3">
+                    @Html.LabelFor(a => a.Patient.Email, new { @class = "col-form-label", })
+                    @Html.TextBoxFor(a => a.Patient.Email, new { @class = "form-control", @placeholder = "Email Ασθενή", @id = "inputDefault", @readonly = "true" })
+                    @Html.ValidationMessageFor(a => a.Patient.Email)
+                </div>
+            }
+            else
+            {
+                <div class="form-group col-sm-3">
+                    @Html.LabelFor(a => a.Patient.Email, new { @class = "col-form-label", })
+                    @Html.TextBoxFor(a => a.Patient.Email, new { @class = "form-control", @placeholder = "Email Ασθενή", @id = "inputDefault" })
+                    @Html.ValidationMessageFor(a => a.Patient.Email)
+                </div>
+
+            }
+
+
+
+        </div>
+        <div class="row">
+
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(a => a.Appointment.Date, new { @class = "col-form-label", })
+                @Html.TextBoxFor(a => a.Appointment.Date, new { @class = "form-control", @placeholder = "31/12/2020", @id = "inputDefault" })
+                @Html.ValidationMessageFor(a => a.Appointment.Date)
+            </div>
+            <div class="form-group col-sm-4">
+                @Html.LabelFor(a => a.Appointment.Comments, new { @class = "col-form-label", })
+                @Html.TextAreaFor(a => a.Appointment.Comments, new { @class = "form-control", @id = "Textarea1", @rows = "4" })
+                @Html.ValidationMessageFor(a => a.Appointment.Comments)
+            </div>
+
+            <div class="form-group col-sm-4 my-auto">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1" >
+                    <label class="custom-control-label" for="customSwitch1">Επιβεβαιωμένο</label>
+                    @Html.TextBoxFor(a => a.Appointment.Confirmed, new { @type = "hidden", @id = "hiddenConfirmed" })
+                </div>
+                <br />
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch2" >
+                    <label class="custom-control-label" for="customSwitch2">Εξοφλημένο</label>
+                    @Html.TextBoxFor(a => a.Appointment.Paid, new { @type = "hidden", @id = "hiddenPaid" })
+                </div>
+            </div>
+        </div>
+        @if (User.IsInRole("ApplicationAdmin"))
+        {
+            <button type="submit" class="btn btn-primary">Submit</button> <span>&emsp;</span> @Html.ActionLink("Cancel", "AppointmentList", "Appointment", null, new { @class = "btn btn-primary" })
+        }
+    </fieldset>
+    if (!User.IsInRole("ApplicationAdmin"))
+    {
+        @Html.ActionLink("Cancel", "PatientList", "Patient", null, new { @class = "btn btn-primary" })
+    }
+}
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        var confirmedSwitch = document.getElementById("customSwitch1");
+        var paidSwitch = document.getElementById("customSwitch2");
+        var hiddenConfirmed = document.getElementById("hiddenConfirmed");
+        var hiddenPaid = document.getElementById("hiddenPaid");
+        $(document).ready(function () {
+            if (hiddenConfirmed.value == ("True" || "true")) {
+                $('#customSwitch1').prop("checked", true);
+            }
+            else {
+                $('#customSwitch1').prop("checked", false);
+            }
+
+            if (hiddenPaid.value == ("True" || "true")) {
+                $('#customSwitch2').prop("checked", true);
+            }
+            else {
+                $('#customSwitch2').prop("checked", false);
+            }
+
+        });
+
+        $('#customSwitch1').on('click', function () {
+            if ($(this).prop('checked')) {
+                hiddenConfirmed.value = true;
+            }
+            else {
+                hiddenConfirmed.value= false;
+            }
+
+        });
+
+        $('#customSwitch2').on('click', function () {
+            if ($(this).prop('checked')) {
+                hiddenPaid.value = true;
+            }
+            else {
+                hiddenPaid.value = false;
+            }
+
+        });
+
+    </script>
+
+}

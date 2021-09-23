@@ -1,0 +1,34 @@
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-primary navbar-fixed-top">
+    <a class="navbar-brand" href="#"><i class="fa fa-flask" aria-hidden="true" style="font-size:200%"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" >
+        <span class="navbar-toggler-icon" ></span>
+    </button>
+
+    <div class="collapse  navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item nav-link">
+                <h4> @Html.ActionLink("Βιοεξεταστική", "Index", "Home", null, new { Style = "color:White" })</h4>
+            </li>
+            <li class="nav-item nav-link">
+                <h4> @Html.ActionLink("Τμήματα", "DepartmentList", "Department", null, new { Style = "color:White" })</h4>
+            </li>
+            <li class="nav-item nav-link">
+                <h4>@Html.ActionLink("Εξετάσεις", "ExamIndex", "Exams", null, new { Style = "color:White" })</h4>
+            </li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item nav-link">
+                    <h4>@Html.ActionLink("Ασθενείς", "PatientList", "Patient", null, new { Style = "color:White" })</h4>
+                    </li>
+            
+                <li class="nav-item nav-link">
+                    <h4>@Html.ActionLink("Ραντεβού", "AppointmentListle", "Appointment", null, new { Style = "color:White" })</h4>
+                </li>
+            }
+
+            </ul>
+        @Html.Partial("_LoginPartial")
+    </div>
+</nav>
+
+

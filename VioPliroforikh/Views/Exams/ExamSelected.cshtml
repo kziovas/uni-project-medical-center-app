@@ -1,0 +1,28 @@
+﻿@model VioPliroforikh.ViewModels.ExamIndexViewClass
+
+
+
+@if (Model.Exam != null)
+{
+    <h2 class="ng-binding"><i style="color: #127ba3" class="fa fa-chevron-right"></i>&nbsp;&nbsp;&nbsp;5-HIAA</h2>
+    <p>&nbsp;</p>
+    <h3 class="ng-binding">
+        @Model.Exam.Name <span class="badge badge-primary badge-pill" style="font-size:70%">@Model.Exam.Price &#8364;</span>
+    </h3>
+    <p>&nbsp;</p>
+    <h4>Περιγραφή</h4>
+    <p class="ng-binding">
+        @Model.Exam.Description
+    </p>
+    <p>&nbsp;</p>
+    <h4>Χρειάζεται προετοιμασία για την εξέταση;</h4>
+    <p class="ng-binding">
+        @Model.Exam.Preparation
+    </p>
+    <p>&nbsp;</p>
+    <h4>Διάρκεια εξέτασης;</h4>
+    <p class="ng-binding">
+        @Model.Exam.Duration
+    </p>
+
+}
